@@ -1,27 +1,107 @@
 <ion-header>
-  <ion-toolbar color="primary-shade">
+  <ion-toolbar color="primary">
     <ion-title>
-      Funcionários
+      Registry
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-searchbar animated></ion-searchbar>
-  
-  <ion-card>
+
+  <ion-card class="ion-padding">
     <ion-card-header>
-      <h1>Cadastro</h1>
+      <h1>funcionários</h1>
     </ion-card-header>
-  
+
     <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
+      <ion-input label="Filtrar por {{checkboxValue}}" [value]="inputFilter" (ionInput)="insertValueInFilter($event)" #ionInputEl>
+      </ion-input>
+
+      <ion-list>
+        <ion-item>
+          <ion-label>Nome</ion-label>
+          <ion-checkbox (click)="selectedCheckbox('Nome')"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Cargo</ion-label>
+          <ion-checkbox (click)="selectedCheckbox('Cargo')"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Telefone</ion-label>
+          <ion-checkbox (click)="selectedCheckbox('Telefone')"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Cidade</ion-label>
+          <ion-checkbox (click)="selectedCheckbox('Cidade')"></ion-checkbox>
+        </ion-item>
+        <ion-button size="small" expand="full" shape="round" (click)="handlerFilter()" [disabled]="disabledBtn" class="ion-padding">
+          <ion-icon name="search-outline"></ion-icon>
+          Buscar
+        </ion-button>
+      </ion-list>
+
+
+      <ion-list *ngIf="funcionarios">
+        <ion-item *ngFor="let funcionario of funcionarios">
+          <ion-label>
+            {{ funcionario.Nome }} {{funcionario.Sobrenome}}
+          </ion-label>
+          <ion-label>
+            {{ funcionario.Cargo }}
+          </ion-label>
+          <ion-label>
+            {{ funcionario.DataNasc }}
+          </ion-label>
+          <ion-label>
+            {{ funcionario.Endereco }}
+          </ion-label>
+          <ion-label>
+            {{ funcionario.Cidade }}
+          </ion-label>
+          <ion-label>
+            {{ funcionario.CEP }}
+          </ion-label>
+          <ion-label>
+            {{ funcionario.Pais }}
+          </ion-label>
+          <ion-label>
+            {{ funcionario.Fone }}
+          </ion-label>
+          <ion-label>
+            {{ funcionario.Salario }}
+          </ion-label>
+    
+    
+          <ion-buttons slot="end">
+            <ion-button fill="clear" (click)="removeFuncionario(funcionario.CodFun)">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" (click)="toggleEdit(funcionario.CodFun)">
+              <ion-icon name="create"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          
+          <ion-item *ngIf="handleOpen[funcionario.CodFun]">
+            <ion-input [(ngModel)]="funcionario.Nome" placeholder="Nome"></ion-input>
+            <ion-input [(ngModel)]="funcionario.Sobrenome" placeholder="Sobrenome"></ion-input>
+            <ion-input [(ngModel)]="funcionario.Cargo" placeholder="Cargo"></ion-input>
+            <ion-input [(ngModel)]="funcionario.DataNasc" placeholder="DataNasc"></ion-input>
+            <ion-input [(ngModel)]="funcionario.Endereco" placeholder="Endereco"></ion-input>
+            <ion-input [(ngModel)]="funcionario.Cidade" placeholder="Cidade"></ion-input>
+            <ion-input [(ngModel)]="funcionario.CEP" placeholder="CEP"></ion-input>
+            <ion-input [(ngModel)]="funcionario.Pais" placeholder="Pais"></ion-input>
+            <ion-input [(ngModel)]="funcionario.Fone" placeholder="Fone"></ion-input>
+            <ion-input [(ngModel)]="funcionario.Salario" placeholder="Salario"></ion-input>
+            
+            <ion-buttons slot="end">
+              <ion-button (click)="edit(funcionario)">Confirmar</ion-button>
+              <ion-button (click)="handleOpen[funcionario.CodFun] = false">Cancelar</ion-button>
+            </ion-buttons>
+          </ion-item>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
-  
-    <ion-button color="primary-tint">
-      <ion-icon slot="start" name="checkmark-outline"></ion-icon>
-      Inserir
-    </ion-button>  
   </ion-card>
 </ion-content>
 
