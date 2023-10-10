@@ -8,6 +8,10 @@
 
 <ion-content>
   <ion-searchbar animated></ion-searchbar>
+  <ion-button size="small" expand="full" shape="round" (click)="handlerFilter()" [disabled]="disabledBtn" class="ion-padding">
+    <ion-icon name="add"></ion-icon>
+    Inserir
+  </ion-button>
 
   <ion-card class="ion-padding">
     <ion-card-header>
