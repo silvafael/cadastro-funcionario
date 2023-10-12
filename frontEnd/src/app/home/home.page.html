@@ -1,17 +1,13 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>
-      Registry
+      Registro
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
   <ion-searchbar animated></ion-searchbar>
-  <ion-button size="small" expand="full" shape="round" (click)="handlerFilter()" [disabled]="disabledBtn" class="ion-padding">
-    <ion-icon name="add"></ion-icon>
-    Inserir
-  </ion-button>
 
   <ion-card class="ion-padding">
     <ion-card-header>
@@ -39,7 +35,7 @@
           <ion-label>Cidade</ion-label>
           <ion-checkbox (click)="selectedCheckbox('Cidade')"></ion-checkbox>
         </ion-item>
-        <ion-button size="small" expand="full" shape="round" (click)="handlerFilter()" [disabled]="disabledBtn" class="ion-padding">
+        <ion-button expand="full" (click)="handlerFilter()" [disabled]="disabledBtn">
           <ion-icon name="search-outline"></ion-icon>
           Buscar
         </ion-button>
